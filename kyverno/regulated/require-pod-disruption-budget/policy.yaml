@@ -13,7 +13,7 @@ metadata:
       PodDisruptionBudget (PDB) to guarantee availability during cluster
       maintenance and voluntary disruptions (SOC2 CC7.1). This policy
       validates that the Deployment carries the annotation
-      dagon.io/pdb: "managed" indicating that a PDB has been applied by
+      arxen.io/pdb: "managed" indicating that a PDB has been applied by
       the platform. Fix: ensure your Backstage template includes a PDB
       resource, or ask the platform team to apply one.
 spec:
@@ -28,11 +28,11 @@ spec:
                 - Deployment
               namespaceSelector:
                 matchExpressions:
-                  - key: dagon.io/managed
+                  - key: arxen.io/managed
                     operator: In
                     values:
                       - "true"
-                  - key: dagon.io/compliance-tier
+                  - key: arxen.io/compliance-tier
                     operator: In
                     values:
                       - "soc2"
@@ -51,11 +51,11 @@ spec:
         message: >-
           Deployment '{{ request.object.metadata.name }}' in namespace
           '{{ request.object.metadata.namespace }}' is missing the
-          annotation dagon.io/pdb: "managed" (SOC2 CC7.1, HIPAA §164.312).
+          annotation arxen.io/pdb: "managed" (SOC2 CC7.1, HIPAA §164.312).
           A PodDisruptionBudget is required to protect availability during
           node maintenance. Ensure your Backstage template applies a PDB,
           or contact the platform team.
         pattern:
           metadata:
             annotations:
-              dagon.io/pdb: "managed"
+              arxen.io/pdb: "managed"

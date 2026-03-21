@@ -3,16 +3,16 @@ kind: Namespace
 metadata:
   name: namespace-missing-tenant-id
   labels:
-    dagon.io/managed: "true"
-    dagon.io/compliance-tier: "soc2"
-    dagon.io/environment: "dev"
+    arxen.io/managed: "true"
+    arxen.io/compliance-tier: "soc2"
+    arxen.io/environment: "dev"
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: namespace-with-tenant-id
   labels:
-    dagon.io/managed: "true"
-    dagon.io/tenant-id: "33333333-3333-3333-3333-333333333333"
-    dagon.io/compliance-tier: "soc2"
-    dagon.io/environment: "dev"
+    arxen.io/managed: "true"
+    arxen.io/tenant-id: "33333333-3333-3333-3333-333333333333"
+    arxen.io/compliance-tier: "soc2"
+    arxen.io/environment: "dev"

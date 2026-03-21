@@ -10,7 +10,7 @@ metadata:
     policies.kyverno.io/controls: "GDPR-Art25, SOC2-CC6.1"
     policies.kyverno.io/description: >-
       Namespaces with compliance-tier 'hipaa' or 'gdpr' must carry the
-      annotation dagon.io/encryption: "at-rest" to confirm that persistent
+      annotation arxen.io/encryption: "at-rest" to confirm that persistent
       data is encrypted at rest (GDPR Art. 25 — Data Protection by Design).
       This annotation is applied by the provisioning workflow after verifying
       the underlying storage class uses encryption. Fix: ensure the namespace
@@ -27,11 +27,11 @@ spec:
                 - Namespace
               selector:
                 matchExpressions:
-                  - key: dagon.io/managed
+                  - key: arxen.io/managed
                     operator: In
                     values:
                       - "true"
-                  - key: dagon.io/compliance-tier
+                  - key: arxen.io/compliance-tier
                     operator: In
                     values:
                       - "hipaa"
@@ -48,11 +48,11 @@ spec:
       validate:
         message: >-
           Namespace '{{ request.object.metadata.name }}' has compliance-tier
-          '{{ request.object.metadata.labels["dagon.io/compliance-tier"] }}'
-          but is missing annotation dagon.io/encryption: "at-rest" (GDPR
+          '{{ request.object.metadata.labels["arxen.io/compliance-tier"] }}'
+          but is missing annotation arxen.io/encryption: "at-rest" (GDPR
           Art. 25). The provisioning workflow must confirm encryption is
           enabled on the underlying storage class and apply this annotation.
         pattern:
           metadata:
             annotations:
-              dagon.io/encryption: "at-rest"
+              arxen.io/encryption: "at-rest"

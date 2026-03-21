@@ -1,8 +1,8 @@
-# dagon-policy — Claude Code Guide
+# arxen-policy — Claude Code Guide
 
 ## Purpose
 
-Cluster-level security guardrails: Kyverno admission policies and OPA/Rego rules for IaC. Enforces SOC2, HIPAA, and GDPR controls across all Dagon-managed Kubernetes clusters.
+Cluster-level security guardrails: Kyverno admission policies and OPA/Rego rules for IaC. Enforces SOC2, HIPAA, and GDPR controls across all Arxen-managed Kubernetes clusters.
 
 ## Architecture
 

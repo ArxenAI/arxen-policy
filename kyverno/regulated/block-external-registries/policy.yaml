@@ -10,7 +10,7 @@ metadata:
     policies.kyverno.io/controls: "SOC2-CC6.1, HIPAA-164.312"
     policies.kyverno.io/description: >-
       In regulated namespaces (soc2/hipaa/gdpr compliance tier), container
-      images must be pulled from the Dagon-approved Azure Container Registry
+      images must be pulled from the Arxen-approved Azure Container Registry
       (ACR) prefix. Images from Docker Hub, GHCR, Quay, or any other external
       registry are blocked because they have not passed the organisation's
       vulnerability scan pipeline (SOC2 CC6.1). Fix: push the image to the
@@ -27,11 +27,11 @@ spec:
                 - Pod
               namespaceSelector:
                 matchExpressions:
-                  - key: dagon.io/managed
+                  - key: arxen.io/managed
                     operator: In
                     values:
                       - "true"
-                  - key: dagon.io/compliance-tier
+                  - key: arxen.io/compliance-tier
                     operator: In
                     values:
                       - "soc2"

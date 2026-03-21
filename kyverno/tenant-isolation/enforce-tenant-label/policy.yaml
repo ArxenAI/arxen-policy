@@ -9,10 +9,10 @@ metadata:
     policies.kyverno.io/subject: "Namespace"
     policies.kyverno.io/controls: "SOC2-CC6.1, SOC2-CC6.2"
     policies.kyverno.io/description: >-
-      Every Dagon-managed namespace must carry a valid dagon.io/tenant-id
+      Every Arxen-managed namespace must carry a valid arxen.io/tenant-id
       label containing a non-empty value. Without this label, tenant isolation
       cannot be enforced by downstream policies, quota controllers, or the
-      audit log pipeline. Fix: ensure the namespace is created via the Dagon
+      audit log pipeline. Fix: ensure the namespace is created via the Arxen
       portal or API, which stamps the tenant-id automatically.
 spec:
   validationFailureAction: Enforce
@@ -26,7 +26,7 @@ spec:
                 - Namespace
               selector:
                 matchExpressions:
-                  - key: dagon.io/managed
+                  - key: arxen.io/managed
                     operator: In
                     values:
                       - "true"
@@ -42,11 +42,11 @@ spec:
       validate:
         message: >-
           Namespace '{{ request.object.metadata.name }}' is missing the
-          required label dagon.io/tenant-id. All Dagon-managed namespaces
+          required label arxen.io/tenant-id. All Arxen-managed namespaces
           must identify their tenant for isolation and audit purposes
-          (SOC2 CC6.1). Create namespaces via the Dagon portal to ensure
+          (SOC2 CC6.1). Create namespaces via the Arxen portal to ensure
           this label is applied correctly.
         pattern:
           metadata:
             labels:
-              dagon.io/tenant-id: "?*"
+              arxen.io/tenant-id: "?*"

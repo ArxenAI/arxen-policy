@@ -1,6 +1,6 @@
-# Dagon Policy — Compliance Control Mapping
+# Arxen Policy — Compliance Control Mapping
 
-This document maps each Dagon policy file to its corresponding compliance
+This document maps each Arxen policy file to its corresponding compliance
 framework control(s). Use this as evidence during SOC2, HIPAA, or GDPR
 audits to demonstrate control coverage.
 
@@ -110,7 +110,7 @@ protection principles are implemented by default.
 
 - `kyverno/regulated/require-encryption-labels/` — Namespaces handling
   personal data must confirm that underlying storage uses encryption at
-  rest. The `dagon.io/encryption: "at-rest"` annotation is the audit
+  rest. The `arxen.io/encryption: "at-rest"` annotation is the audit
   evidence that this has been verified by the provisioning pipeline.
 
 ---
@@ -135,10 +135,10 @@ All tiers also receive tenant-isolation policies.
 ```yaml
 metadata:
   labels:
-    dagon.io/managed: "true"
-    dagon.io/tenant-id: "<tenant-uuid>"
-    dagon.io/compliance-tier: "soc2"   # baseline | soc2 | hipaa | gdpr
-    dagon.io/environment: "dev"        # dev | staging | prod
+    arxen.io/managed: "true"
+    arxen.io/tenant-id: "<tenant-uuid>"
+    arxen.io/compliance-tier: "soc2"   # baseline | soc2 | hipaa | gdpr
+    arxen.io/environment: "dev"        # dev | staging | prod
 ```
 
 ---
@@ -146,7 +146,7 @@ metadata:
 ## Evidence Collection
 
 Kyverno generates `PolicyReport` and `ClusterPolicyReport` objects in the
-cluster. The `dagon-controls-evidence` repository collects these reports
+cluster. The `arxen-controls-evidence` repository collects these reports
 automatically and archives them as compliance evidence. Each report entry
 references the policy name, control ID (from annotations), resource
 affected, and pass/fail result.

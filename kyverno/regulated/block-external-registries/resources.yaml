@@ -3,10 +3,10 @@ kind: Namespace
 metadata:
   name: regulated-ns
   labels:
-    dagon.io/managed: "true"
-    dagon.io/compliance-tier: "soc2"
-    dagon.io/tenant-id: "22222222-2222-2222-2222-222222222222"
-    dagon.io/environment: "prod"
+    arxen.io/managed: "true"
+    arxen.io/compliance-tier: "soc2"
+    arxen.io/tenant-id: "22222222-2222-2222-2222-222222222222"
+    arxen.io/environment: "prod"
 ---
 apiVersion: v1
 kind: Pod

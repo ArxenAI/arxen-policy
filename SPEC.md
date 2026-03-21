@@ -1,4 +1,4 @@
-# dagon-policy — Specification
+# arxen-policy — Specification
 
 ## Purpose
 
@@ -117,9 +117,9 @@ spec:
               kinds: [Pod]            # Always specific kinds, never *
               namespaceSelector:
                 matchExpressions:
-                  - key: dagon.io/managed
+                  - key: arxen.io/managed
                     operator: In
-                    values: ["true"]  # Only apply to Dagon-managed namespaces
+                    values: ["true"]  # Only apply to Arxen-managed namespaces
       exclude:
         any:
           - resources:
@@ -223,23 +223,23 @@ Full mapping: `docs/compliance-mapping.md`
 
 ## Namespace Labeling Convention
 
-Dagon-managed namespaces must carry labels that drive policy targeting:
+Arxen-managed namespaces must carry labels that drive policy targeting:
 
 ```yaml
 metadata:
   labels:
-    dagon.io/managed: "true"
-    dagon.io/tenant-id: "<tenant-uuid>"
-    dagon.io/compliance-tier: "soc2"   # "baseline" | "soc2" | "hipaa" | "gdpr"
-    dagon.io/environment: "dev"
+    arxen.io/managed: "true"
+    arxen.io/tenant-id: "<tenant-uuid>"
+    arxen.io/compliance-tier: "soc2"   # "baseline" | "soc2" | "hipaa" | "gdpr"
+    arxen.io/environment: "dev"
 ```
 
-Policies use `namespaceSelector` to match on `dagon.io/managed: "true"` so they never interfere with system namespaces.
+Policies use `namespaceSelector` to match on `arxen.io/managed: "true"` so they never interfere with system namespaces.
 
 ---
 
 ## Non-Goals
 
-- No cloud-specific admission policies (cloud identity enforcement is handled by `dagon-api`)
-- No runtime security (Falco, Tetragon) — that is a `dagon-gitops` concern
+- No cloud-specific admission policies (cloud identity enforcement is handled by `arxen-api`)
+- No runtime security (Falco, Tetragon) — that is a `arxen-gitops` concern
 - No policies that mutate resources silently without an audit trail

@@ -1,13 +1,13 @@
-# dagon-policy
+# arxen-policy
 
-Policy-as-code enforcement layer for Dagon: Kubernetes admission policies
+Policy-as-code enforcement layer for Arxen: Kubernetes admission policies
 (Kyverno) and IaC validation rules (OPA/Conftest).
 
 ## Scope
 
 - Kubernetes admission policies via Kyverno ClusterPolicies
 - IaC policy checks via OPA/Rego rules validated with Conftest
-- Baseline controls applied to all Dagon-managed namespaces
+- Baseline controls applied to all Arxen-managed namespaces
 - Regulated controls for SOC2, HIPAA, and GDPR workloads
 - Tenant isolation boundaries enforced at the Kubernetes API level
 
@@ -22,7 +22,7 @@ Policy-as-code enforcement layer for Dagon: Kubernetes admission policies
 
 ```
 kyverno/
-  baseline/          # Applied to all dagon.io/managed namespaces
+  baseline/          # Applied to all arxen.io/managed namespaces
   regulated/         # Applied to soc2/hipaa/gdpr compliance-tier namespaces
   tenant-isolation/  # Tenant boundary enforcement
 iac/
