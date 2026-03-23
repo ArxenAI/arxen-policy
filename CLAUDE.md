@@ -46,8 +46,10 @@ annotations:
 Every `policy.yaml` requires a sibling `kyverno-test.yaml` with both `pass` and `fail` test cases.
 
 Run tests locally:
-```bash
-kyverno test kyverno/<policy-name>/
+```powershell
+kyverno test kyverno/baseline/ --detailed-results
+kyverno test kyverno/regulated/ --detailed-results
+kyverno test kyverno/tenant-isolation/ --detailed-results
 ```
 
 ## Constraints

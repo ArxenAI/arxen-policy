@@ -1,4 +1,4 @@
-# dagon-policy Makefile
+# arxen-policy Makefile
 # Usage: make <target>  |  make help
 
 KYVERNO_VERSION  := v1.12.5

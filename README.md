@@ -38,26 +38,49 @@ docs/
 - [OPA](https://www.openpolicyagent.org/docs/latest/) v0.68+
 - [Conftest](https://www.conftest.dev/) v0.50+
 
-Install all tools:
+Install all tools (Windows):
+
+```powershell
+winget install kyverno.kyverno
+winget install open-policy-agent.opa
+# Conftest — download from https://github.com/open-policy-agent/conftest/releases
+```
+
+Install all tools (macOS):
 
 ```bash
-make install-tools
+brew install kyverno opa conftest
+```
+
+Install all tools (Linux):
+
+```bash
+curl -sSL https://github.com/kyverno/kyverno/releases/download/v1.12.5/kyverno_linux_amd64.tar.gz | tar -xz -C /usr/local/bin kyverno
+curl -sSL https://github.com/open-policy-agent/opa/releases/download/v0.68.0/opa_linux_amd64_static -o /usr/local/bin/opa && chmod +x /usr/local/bin/opa
+curl -sSL https://github.com/open-policy-agent/conftest/releases/download/v0.50.0/conftest_0.50.0_Linux_x86_64.tar.gz | tar -xz -C /usr/local/bin conftest
 ```
 
 ## Running Tests
 
-```bash
-# All tests
-make test
+Kyverno policy tests:
 
-# Kyverno policy tests only
-make test-kyverno
+```powershell
+kyverno test kyverno/baseline/ --detailed-results
+kyverno test kyverno/regulated/ --detailed-results
+kyverno test kyverno/tenant-isolation/ --detailed-results
+```
 
-# OPA/Rego unit tests only
-make test-rego
+OPA/Rego unit tests:
 
-# Validate a real Terraform/OpenTofu plan against Azure rules
-make conftest-azure PLAN=path/to/plan.json
+```powershell
+opa test iac/azure/ --verbose
+opa test iac/common/ --verbose
+```
+
+Validate a real OpenTofu plan against Azure rules:
+
+```powershell
+conftest test plan.json --policy iac/azure/ --policy iac/common/
 ```
 
 ## Compliance Mapping
