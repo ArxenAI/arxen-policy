@@ -52,8 +52,12 @@ spec:
           registry (*.azurecr.io). External registries are not permitted in
           regulated namespaces (SOC2 CC6.1, HIPAA §164.312). Push the image
           to the tenant ACR and reference it as
-          <tenant>.azurecr.io/<name>:<version>.
+          <tenant>.azurecr.io/<name>:<version>. This applies to both
+          containers and initContainers.
         foreach:
           - list: "request.object.spec.containers"
+            pattern:
+              image: "*.azurecr.io/*"
+          - list: "request.object.spec.initContainers"
             pattern:
               image: "*.azurecr.io/*"

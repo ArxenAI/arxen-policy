@@ -41,3 +41,20 @@ spec:
   containers:
     - name: app
       image: nginx:1.25.3
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-privileged-initcontainer
+  namespace: team-alpha
+spec:
+  initContainers:
+    - name: setup
+      image: nginx:1.25.3
+      securityContext:
+        privileged: true
+  containers:
+    - name: app
+      image: nginx:1.25.3
+      securityContext:
+        privileged: false

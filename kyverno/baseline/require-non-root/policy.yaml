@@ -40,12 +40,18 @@ spec:
                 - external-secrets
       validate:
         message: >-
-          Pod '{{ request.object.metadata.name }}' has a container that may
-          run as root. Set securityContext.runAsNonRoot: true or
-          securityContext.runAsUser to a non-zero UID on every container
-          (SOC2 CC6.6).
+          Pod '{{ request.object.metadata.name }}' has a container or
+          initContainer that may run as root. Set securityContext.runAsNonRoot:
+          true or securityContext.runAsUser to a non-zero UID on every
+          container and initContainer (SOC2 CC6.6).
         foreach:
           - list: "request.object.spec.containers"
+            anyPattern:
+              - securityContext:
+                  runAsNonRoot: true
+              - securityContext:
+                  runAsUser: ">0"
+          - list: "request.object.spec.initContainers"
             anyPattern:
               - securityContext:
                   runAsNonRoot: true

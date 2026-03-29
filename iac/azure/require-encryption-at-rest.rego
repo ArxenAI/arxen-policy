@@ -26,9 +26,33 @@ deny contains msg if {
 deny contains msg if {
     resource := input.resource_changes[_]
     resource.type == "azurerm_storage_account"
+    not has_key(resource.change.after, "infrastructure_encryption_enabled")
+    msg := sprintf(
+        "DENY [SOC2-CC6.6] Storage account '%s': infrastructure_encryption_enabled is not set. Azure defaults to false when the field is omitted — double encryption will be disabled. Explicitly set infrastructure_encryption_enabled = true.",
+        [resource.name],
+    )
+}
+
+deny contains msg if {
+    resource := input.resource_changes[_]
+    resource.type == "azurerm_storage_account"
     resource.change.after.min_tls_version != "TLS1_2"
     msg := sprintf(
         "DENY [SOC2-CC6.6] Storage account '%s': min_tls_version must be 'TLS1_2'. TLS 1.0 and 1.1 have known vulnerabilities. Set min_tls_version = \"TLS1_2\".",
         [resource.name],
     )
+}
+
+deny contains msg if {
+    resource := input.resource_changes[_]
+    resource.type == "azurerm_storage_account"
+    not has_key(resource.change.after, "min_tls_version")
+    msg := sprintf(
+        "DENY [SOC2-CC6.6] Storage account '%s': min_tls_version is not set. Azure provider versions may default to TLS1_0. Explicitly set min_tls_version = \"TLS1_2\".",
+        [resource.name],
+    )
+}
+
+has_key(obj, key) if {
+    _ := obj[key]
 }

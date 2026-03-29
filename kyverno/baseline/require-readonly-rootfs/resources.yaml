@@ -47,3 +47,26 @@ spec:
   volumes:
     - name: tmp
       emptyDir: {}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-writable-rootfs-initcontainer
+  namespace: team-alpha
+spec:
+  initContainers:
+    - name: setup
+      image: nginx:1.25.3
+      securityContext:
+        readOnlyRootFilesystem: false
+  containers:
+    - name: app
+      image: nginx:1.25.3
+      securityContext:
+        readOnlyRootFilesystem: true
+      volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+  volumes:
+    - name: tmp
+      emptyDir: {}

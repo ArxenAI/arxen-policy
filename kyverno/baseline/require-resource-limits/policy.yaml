@@ -40,12 +40,18 @@ spec:
                 - external-secrets
       validate:
         message: >-
-          Pod '{{ request.object.metadata.name }}' has a container missing
-          resource limits. Add resources.limits.cpu and resources.limits.memory
-          to every container to prevent unbounded resource consumption
-          (SOC2 CC7.1).
+          Pod '{{ request.object.metadata.name }}' has a container or
+          initContainer missing resource limits. Add resources.limits.cpu and
+          resources.limits.memory to every container and initContainer to
+          prevent unbounded resource consumption (SOC2 CC7.1).
         foreach:
           - list: "request.object.spec.containers"
+            pattern:
+              resources:
+                limits:
+                  cpu: "?*"
+                  memory: "?*"
+          - list: "request.object.spec.initContainers"
             pattern:
               resources:
                 limits:

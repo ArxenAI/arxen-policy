@@ -44,9 +44,13 @@ spec:
           readOnlyRootFilesystem: true. A writable root filesystem allows
           runtime file tampering (SOC2 CC6.6). Set
           securityContext.readOnlyRootFilesystem: true on every container
-          and mount writable paths via volume mounts.
+          and initContainer, and mount writable paths via volume mounts.
         foreach:
           - list: "request.object.spec.containers"
+            pattern:
+              securityContext:
+                readOnlyRootFilesystem: true
+          - list: "request.object.spec.initContainers"
             pattern:
               securityContext:
                 readOnlyRootFilesystem: true

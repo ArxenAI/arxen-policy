@@ -37,3 +37,16 @@ spec:
   containers:
     - name: app
       image: mycompany.azurecr.io/apps/backend:v2.1.0
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-external-registry-initcontainer
+  namespace: regulated-ns
+spec:
+  initContainers:
+    - name: setup
+      image: docker.io/library/busybox:1.36
+  containers:
+    - name: app
+      image: mycompany.azurecr.io/apps/backend:v2.1.0

@@ -10,12 +10,24 @@ results:
   - policy: block-external-registries
     rule: check-registry
     resource: pod-docker-hub-image
+    namespace: regulated-ns
+    kind: Pod
     result: fail
   - policy: block-external-registries
     rule: check-registry
     resource: pod-ghcr-image
+    namespace: regulated-ns
+    kind: Pod
     result: fail
   - policy: block-external-registries
     rule: check-registry
     resource: pod-acr-image
+    namespace: regulated-ns
+    kind: Pod
     result: pass
+  - policy: block-external-registries
+    rule: check-registry
+    resource: pod-external-registry-initcontainer
+    namespace: regulated-ns
+    kind: Pod
+    result: fail

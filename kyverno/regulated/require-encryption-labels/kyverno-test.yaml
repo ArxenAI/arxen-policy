@@ -10,16 +10,20 @@ results:
   - policy: require-encryption-labels
     rule: check-encryption-annotation
     resource: hipaa-namespace-no-encryption
+    kind: Namespace
     result: fail
   - policy: require-encryption-labels
     rule: check-encryption-annotation
     resource: gdpr-namespace-no-encryption
+    kind: Namespace
     result: fail
   - policy: require-encryption-labels
     rule: check-encryption-annotation
     resource: soc2-namespace-no-encryption
+    kind: Namespace
     result: skip
   - policy: require-encryption-labels
     rule: check-encryption-annotation
     resource: hipaa-namespace-with-encryption
+    kind: Namespace
     result: pass

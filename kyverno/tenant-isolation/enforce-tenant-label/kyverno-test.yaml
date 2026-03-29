@@ -10,8 +10,10 @@ results:
   - policy: enforce-tenant-label
     rule: check-tenant-id-label
     resource: namespace-missing-tenant-id
+    kind: Namespace
     result: fail
   - policy: enforce-tenant-label
     rule: check-tenant-id-label
     resource: namespace-with-tenant-id
+    kind: Namespace
     result: pass

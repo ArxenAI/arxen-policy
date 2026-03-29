@@ -48,3 +48,23 @@ spec:
         limits:
           cpu: "500m"
           memory: "512Mi"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-initcontainer-without-limits
+  namespace: team-alpha
+spec:
+  initContainers:
+    - name: setup
+      image: nginx:1.25.3
+  containers:
+    - name: app
+      image: nginx:1.25.3
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "500m"
+          memory: "512Mi"

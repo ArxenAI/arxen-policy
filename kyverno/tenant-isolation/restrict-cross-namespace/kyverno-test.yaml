@@ -10,8 +10,12 @@ results:
   - policy: restrict-cross-namespace-serviceaccount
     rule: check-serviceaccount-audience
     resource: pod-cross-namespace-sa-token
+    namespace: team-alpha
+    kind: Pod
     result: fail
   - policy: restrict-cross-namespace-serviceaccount
     rule: check-serviceaccount-audience
     resource: pod-local-sa-token
+    namespace: team-alpha
+    kind: Pod
     result: pass

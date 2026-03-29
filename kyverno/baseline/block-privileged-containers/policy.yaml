@@ -44,9 +44,14 @@ spec:
           Pod '{{ request.object.metadata.name }}' has a container running in
           privileged mode. Privileged containers have full host kernel access
           and violate tenant isolation (HIPAA §164.312, SOC2 CC6.6). Remove
-          securityContext.privileged or set it to false on every container.
+          securityContext.privileged or set it to false on every container
+          and initContainer.
         foreach:
           - list: "request.object.spec.containers"
+            pattern:
+              =(securityContext):
+                =(privileged): "false"
+          - list: "request.object.spec.initContainers"
             pattern:
               =(securityContext):
                 =(privileged): "false"

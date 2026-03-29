@@ -31,3 +31,9 @@ results:
     namespace: team-alpha
     kind: Pod
     result: pass
+  - policy: require-non-root
+    rule: check-run-as-non-root
+    resource: pod-root-initcontainer
+    namespace: team-alpha
+    kind: Pod
+    result: fail

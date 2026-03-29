@@ -10,8 +10,12 @@ results:
   - policy: require-pod-disruption-budget
     rule: check-pdb-annotation
     resource: deployment-no-pdb-annotation
+    namespace: regulated-ns
+    kind: Deployment
     result: fail
   - policy: require-pod-disruption-budget
     rule: check-pdb-annotation
     resource: deployment-with-pdb-annotation
+    namespace: regulated-ns
+    kind: Deployment
     result: pass

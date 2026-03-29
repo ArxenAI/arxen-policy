@@ -55,4 +55,4 @@ spec:
             any:
               - key: "{{ request.object.spec.volumes[].projected.sources[].serviceAccountToken.audience | length(@) }}"
                 operator: GreaterThan
-                value: "0"
+                value: 0

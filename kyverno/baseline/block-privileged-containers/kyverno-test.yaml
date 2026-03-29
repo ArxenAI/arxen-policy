@@ -25,3 +25,9 @@ results:
     namespace: team-alpha
     kind: Pod
     result: pass
+  - policy: block-privileged-containers
+    rule: check-privileged
+    resource: pod-privileged-initcontainer
+    namespace: team-alpha
+    kind: Pod
+    result: fail
